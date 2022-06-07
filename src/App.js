@@ -11,6 +11,10 @@ function App() {
   const [status, setStatus] = useState ("all"); //classify todos by status
   const [filteredTodos, setfilteredTodos] = useState ([]); //using diff state to filter todos state
 
+  //useEffect to check trim leading and trailing whitespace
+  // useEffect(() => {
+    
+
   //useEffect to refresh on changes
   useEffect(() => {
     filterHandler()
