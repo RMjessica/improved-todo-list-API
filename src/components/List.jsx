@@ -6,13 +6,12 @@ const List = ({ todos, setTodos, filteredTodos }) => {
   return (
     <div className="">
       <ul className="">
-        {filteredTodos.map(todo => ( 
+        {filteredTodos.map(todos, index => ( 
           <Todo 
-          todo={todo}
           todos={todos} 
           setTodos={setTodos}
-          key={todo.id} 
-          text={todo.text}/>
+          key={index} 
+          label={todos.label}/>
         ))}
       </ul>
     </div>

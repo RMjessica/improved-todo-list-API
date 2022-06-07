@@ -10,10 +10,24 @@ function App() {
   const [todos, setTodos] = useState ([]); //store list of inputs
   const [status, setStatus] = useState ("all"); //classify todos by status
   const [filteredTodos, setfilteredTodos] = useState ([]); //using diff state to filter todos state
-
-  //useEffect to check trim leading and trailing whitespace
-  // useEffect(() => {
     
+  useEffect(() => {
+    fetch('https://assets.breatheco.de/apis/fake/todos/user/RMjessica')
+        .then(response => response.json())
+        .then(data => setTodos(data));
+  }, []);
+
+  useEffect(() => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(todos) 
+      //remember useState is already formatted
+  };
+  fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }, [todos]);
 
   //useEffect to refresh on changes
   useEffect(() => {

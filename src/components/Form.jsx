@@ -14,7 +14,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
     e.preventDefault();
     setTodos([
       ...todos, 
-      {text: inputText, completed: false, id: Math.random() * 1000}
+      {label: inputText, done: false}
     ]);
     setInputText("");
   };
@@ -43,7 +43,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
         <div className="select">
           <select onClick={statusHandler} name="tasks" className="filter'tasks">
             <option value="all">All Tasks</option>
-            <option value="completed">Completed</option>
+            <option value="done">Completed</option>
             <option value="uncompleted">Uncompleted Tasks</option>
           </select>
         </div>
