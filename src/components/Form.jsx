@@ -1,22 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
+import { IoAddOutline } from "react-icons/io5";
 
-//I can add props as my function parameter
-// and add it before the return as props.setInputText
-// or I can add it directly 
 const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
 
+  const [errors, setErrors] = useState(
+    {
+      'error': false,
+      'msg': ""
+    }
+  );
+
   const inputTextHandler = (e) => {
-    //console.log(e.target.value);
-    setInputText(e.target.value);
+    if (e.target.value.length < 25) {
+      setInputText(e.target.value);
+      setErrors(    {
+        'error': false,
+        'msg': ""
+      })
+    } else {
+      let d_error = {
+        'error': true,
+        'msg': "The task cannot exceed 25 characters"
+      }
+      setErrors({...d_error})
+    }
   };
 
   const submitTasksHandler = (e) => {
     e.preventDefault();
+    if (inputText.trim().length === 0) {
+      let d_error = {
+        'error': true,
+        'msg': "You forgot to add your task"
+      }
+      setErrors({...d_error})
+      setInputText("");
+      return;
+    }
     setTodos([
-      ...todos, 
-      {label: inputText, done: false}
+      ...todos,
+      { text: inputText.trim(), completed: false, id: Math.random() * 1000, selected: false }
     ]);
     setInputText("");
+    setErrors(    {
+      'error': false,
+      'msg': ""
+    })
   };
 
   const statusHandler = (e) => {
@@ -24,32 +53,36 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
   };
 
   return (
-    
-      <form>
-        
-          <input 
-          value={inputText}
-          onChange={inputTextHandler}
-          type="text" 
-          className="formControl" 
-          placeholder="Add new task"
+    <div className="container">
+      <form className="row p-3">
+        <div className="col input-group">
+          <input
+            className="form-control"
+            type="text"
+            placeholder="Add new task"
+            aria-describedby="button-addon2"
+            value={inputText}
+            onChange={inputTextHandler}
           />
 
-          <button onClick={submitTasksHandler} className="btn btn-outline-dark">
-            <i className="fas fa-plus square" >Add Task</i>
+          <button onClick={submitTasksHandler} className="btn btn-outline-dark" id="button-addon2">
+            <IoAddOutline className="mb-1" />
           </button>
-       
+        </div>
 
-        <div className="select">
-          <select onClick={statusHandler} name="tasks" className="filter'tasks">
-            <option value="all">All Tasks</option>
-            <option value="done">Completed</option>
+        <div className="col">
+          <select className="form-select" onClick={statusHandler} name="tasks" >
+            <option defaultValue="all">All Tasks</option>
+            <option value="completed">Completed</option>
             <option value="uncompleted">Uncompleted Tasks</option>
           </select>
         </div>
 
+        {errors.error ? (
+          <div className="ms-2 mt-2 text-danger">{errors.msg}</div>
+        ) : null}
       </form>
-     
+    </div>
   );
 };
 
