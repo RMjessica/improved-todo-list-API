@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { IoCheckmark, IoTrashOutline } from "react-icons/io5";
 import { VscChecklist } from "react-icons/vsc";
 
@@ -39,6 +39,13 @@ const Select = ({todos, setTodos, selected, setSelected}) => {
       setSelected(true);
     }
   }
+
+  /* useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/RMJessica", {
+			method: "DELETE",
+			ContentType: "application/json",
+		});
+	}, []); */
 
   return (
     <>

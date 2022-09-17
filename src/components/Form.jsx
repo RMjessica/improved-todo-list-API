@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoAddOutline } from "react-icons/io5";
+import { v4 as uuidv4 } from 'uuid';
 
 const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
 
@@ -39,7 +40,7 @@ const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
     }
     setTodos([
       ...todos,
-      { text: inputText.trim(), completed: false, id: Math.random() * 1000, selected: false }
+      { text: inputText.trim(), completed: false, id: uuidv4(), selected: false }
     ]);
     setInputText("");
     setErrors(    {

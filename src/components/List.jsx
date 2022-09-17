@@ -6,9 +6,9 @@ const List = ({ todos, setTodos, filteredTodos, selected }) => {
   return (
     <div className="container">
       <ul className="list-unstyled row row-cols-3 fw-light text-center mx-4">
-        {filteredTodos.map(todo => ( 
+        {filteredTodos.map(todo=> ( 
           <Todo 
-          todo={todo}
+            todo={todo}
             todos={todos} 
             setTodos={setTodos}
             key={todo.id} 

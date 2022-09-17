@@ -35,7 +35,8 @@ const Todo = ({ todo, todos, setTodos, selected }) => {
     <div className="col d-inline-block p-1">
       <li 
         className={`${todo.completed ? "text-decoration-line-through" : ""} d-inline-block text-start fw-light text-wrap p-1 ${todo.selected ? "bg-dark bg-gradient rounded bg-opacity-25" : ""} `} 
-        onClick={selectedHandler} 
+        onClick={selectedHandler}
+        key={todo.id}
       >
         {todo.text}
       </li>

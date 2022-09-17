@@ -14,12 +14,25 @@ function App() {
   const [selected, setSelected] = useState(false);             // assist with selection of clicked todos
 
   useEffect(() => {
-    fetch('https://assets.breatheco.de/apis/fake/todos/user/RMjessica')
+    fetch("https://assets.breatheco.de/apis/fake/todos/user/RMJessica")
         .then(response => response.json())
         .then(data => setTodos(data));
   }, []);
 
-  /* useEffect(() => {
+	useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/RMJessica", {
+			method: "POST",
+			body: JSON.stringify([]),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => res.json())
+			.catch()
+			.then();
+	}, []);
+
+  useEffect(() => {
     const requestOptions = {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
@@ -28,7 +41,7 @@ function App() {
   fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
       .then(response => response.json())
       .then(data => console.log(data))
-  }, [todos]); */
+  }, [todos]);
 
   useEffect(() => {
 
